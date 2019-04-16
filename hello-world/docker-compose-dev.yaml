@@ -1,0 +1,20 @@
+version: '3'
+services:
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+      dockerfile: rabbitmq.dockerfile
+
+  producer:
+    build:
+      context: ./producer
+      dockerfile: producer.dockerfile
+    depends_on:
+      - rabbitmq
+
+  consumer:
+    build:
+      context: ./consumer
+      dockerfile: consumer.dockerfile
+    depends_on:
+      - rabbitmq
