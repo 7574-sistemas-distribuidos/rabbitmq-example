@@ -2,14 +2,15 @@
 import pika
 import time
 
-time.sleep(10)
-
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='rabbitmq'))
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')
 
-channel.basic_publish(exchange='', routing_key='hello', body='Hello World!')
-print(" [x] Sent 'Hello World!'")
+for i in range(100):
+    channel.basic_publish(exchange='', routing_key='hello', body='Hello World {}!'.format(i))
+    print(" [x] Sent 'Hello World {}!'".format(i))
+    time.sleep(1)
+
 connection.close()
