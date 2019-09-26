@@ -5,7 +5,7 @@ import random
 import time
 
 # Wait for rabbitmq to come up
-time.sleep(20)
+time.sleep(10)
 
 # Create RabbitMQ communication channel
 connection = pika.BlockingConnection(

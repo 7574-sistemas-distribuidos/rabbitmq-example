@@ -3,6 +3,9 @@ import pika
 import time
 import os
 
+# Wait for rabbitmq to come up
+time.sleep(10)
+
 consumer_id = os.environ["CONSUMER_ID"]
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='rabbitmq'))
@@ -14,7 +17,8 @@ print('[{}] Waiting for messages. To exit press CTRL+C'.format(consumer_id))
 
 def callback(ch, method, properties, body):
     print("[{}] Received {}".format(consumer_id, body))
-    time.sleep(body.count(b'.'))
+    if consumer_id == "1":
+        time.sleep(body.count(b'.'))
     print("[{}] Done".format(consumer_id))
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
