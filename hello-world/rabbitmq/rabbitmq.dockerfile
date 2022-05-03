@@ -1,3 +1,2 @@
-FROM rabbitmq:3.7.14-management
-RUN apt-get update
-RUN apt-get install -y curl
+FROM rabbitmq:3.9.16-management-alpine
+RUN apk update && apk add curl

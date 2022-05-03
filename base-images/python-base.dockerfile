@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 # Install golang
 RUN apt update && apt install python3 python3-pip -y
